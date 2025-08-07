@@ -1,0 +1,34 @@
+name: Goat Bot CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🧰 Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: ✅ Check formatting (optional)
+        run: |
+          npm install --no-save eslint
+          npx eslint . || true
+
+      - name: 🧪 Run tests (if any)
+        run: echo "No test script defined yet"
+
+      - name: ✅ Build finished
+        run: echo "Goat Bot is ready to deploy or run"
